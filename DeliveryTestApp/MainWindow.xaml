@@ -1,0 +1,49 @@
+﻿<Window x:Class="DeliveryTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeliveryTestApp"
+        mc:Ignorable="d"
+        Title="DeliveryTestApp" Height="300" Width="300" 
+        ResizeMode="CanMinimize"
+         WindowStyle="None" AllowsTransparency="True" 
+        Background="Transparent" WindowStartupLocation="CenterScreen" PreviewMouseUp="Window_PreviewMouseUp" 
+        Icon="Resources/MainIcon.ico" >
+    <Window.Clip>
+        <RectangleGeometry x:Name="MainAppRect" Rect="0, 0, 300, 300" RadiusX="250" RadiusY="250"/>
+    </Window.Clip>
+    <Grid Background="#FF121212">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Ellipse Grid.RowSpan="3" Stroke="White" StrokeThickness="3" Panel.ZIndex="3"/>
+
+        <StackPanel Orientation="Horizontal" Background="#FF121212" x:Name="Head" Height="80" Grid.ColumnSpan="2">
+        
+        </StackPanel>
+        
+        <StackPanel  Grid.Row="0"  Margin="0 0 0 0" Orientation="Horizontal" Height="50" HorizontalAlignment="Center" Visibility="Collapsed">
+            <Button Name="OrderListBtn" Content="Список заказов" Margin="0 0 0 0" FontSize="30" Style="{DynamicResource MenuBtn}" Click="OrderListBtn_Click"/>
+            <Button Name="LogListBtn" Content="Список логов" Margin="30 0 0 0" FontSize="30" Style="{DynamicResource MenuBtn}" Click="LogListBtn_Click"/>
+            <Button Name="SelectionListBtn" Content="Список выборок" Margin="30 0 0 0" FontSize="30" Style="{DynamicResource MenuBtn}" Click="SelectionListBtn_Click"/>
+        </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 0 0 0" VerticalAlignment="Center" Panel.ZIndex="4" Grid.ColumnSpan="2">
+            <Button x:Name="MinButton" Style="{DynamicResource MinimizeWindowButton}" Width="35" Height="35" Click="MinButton_Click" Margin="0 0 0 0"/>
+            <Button x:Name="CloseButton" Style="{DynamicResource CloseWindowButton}" Width="35" Height="35" Click="CloseButton_Click" Margin="15 0 0 0"/>
+        </StackPanel>
+
+        <Rectangle Grid.Row="0" Fill="White" VerticalAlignment="Bottom" Height="3"/>
+
+        <Frame Grid.Column="1" Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" Focusable="False" Visibility="Collapsed"/>
+        <TextBlock Grid.Row="1" Name="TbClock" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Timer" FontSize="90" TextAlignment="Center"/>
+
+        <Rectangle Grid.Row="2" Fill="White" VerticalAlignment="Top" Height="3"/>
+
+        <Image x:Name="MaximizeBtn" Grid.Row="2" Source="/Resources/MainIcon.png" Width="50" Height="50" Margin="0 10 0 15" MouseLeftButtonDown="MaximizeBtn_MouseLeftButtonDown"/>
+    </Grid>
+</Window>

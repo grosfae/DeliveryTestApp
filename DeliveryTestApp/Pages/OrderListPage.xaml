@@ -1,0 +1,25 @@
+﻿<Page x:Class="DeliveryTestApp.Pages.OrderListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DeliveryTestApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1400"
+      Title="OrderListPage" Background="#FF212121">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Background="#FF121212">
+            <TextBlock Text="Выбор района:" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="0 10 0 0"/>
+            <ComboBox Width="200" Height="35" Text="Район заказа" FontSize="24" VerticalAlignment="Center" IsReadOnly="True" IsEditable="True" Margin="0 5 0 0"/>
+            <TextBlock Text="Период" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="0 20 0 0"/>
+            <Viewbox>
+                <DatePicker/>
+            </Viewbox>
+        </StackPanel>
+    </Grid>
+</Page>
