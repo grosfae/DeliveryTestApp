@@ -74,6 +74,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\LogListPage.xaml.cs">
+      <DependentUpon>LogListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelectionListPage.xaml.cs">
+      <DependentUpon>SelectionListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UpcomingOrdersPage.xaml.cs">
+      <DependentUpon>UpcomingOrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LoaderControl.xaml.cs">
+      <DependentUpon>LoaderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SelectionResultRowControl.xaml.cs">
+      <DependentUpon>SelectionResultRowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LogListViewModel.cs" />
+    <Compile Include="ViewModels\OrderListPageViewModel.cs" />
+    <Compile Include="ViewModels\SelectionListPageViewModel.cs" />
+    <Compile Include="ViewModels\UpcomingOrdersPageViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,7 +112,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\LogListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\OrderListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectionListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UpcomingOrdersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LoaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SelectionResultRowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\MainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MainBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

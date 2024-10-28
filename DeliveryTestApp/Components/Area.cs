@@ -14,5 +14,13 @@ namespace DeliveryTestApp.Components
         public string Name { get; set; }
         public virtual ICollection<Order> Order { get; set; }
         public virtual ICollection<SelectionResult> SelectionResult { get; set; }
+
+        public DateTime FirstDeliveryTime
+        {
+            get
+            {
+                return Order.OrderBy(x => x.DeliveryDateTime).FirstOrDefault().DeliveryDateTime;
+            }
+        }
     }
 }

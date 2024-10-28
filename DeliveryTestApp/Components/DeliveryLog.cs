@@ -11,7 +11,7 @@ namespace DeliveryTestApp.Components
     public class DeliveryLog
     {
         public int Id { get; set; }
-        public string LogDateTime { get; set; }
+        public DateTime LogDateTime { get; set; }
         public string Description { get; set; }
     }
 }

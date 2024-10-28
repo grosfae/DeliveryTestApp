@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeliveryTestApp.Components;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace DeliveryTestApp
     /// </summary>
     public partial class App : Application
     {
+        public static ApplicationContext DB = new ApplicationContext();
     }
 }

@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="DeliveryTestApp.UserControls.SelectionResultRowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DeliveryTestApp.UserControls"
+             mc:Ignorable="d" 
+             Height="auto" d:DesignWidth="1330">
+    <Border Name="ExpandBtn" BorderThickness="0" BorderBrush="#FF121212" MouseLeftButtonDown="ExpandBtn_MouseLeftButtonDown" Cursor="Hand">
+        <Border.Background>
+            <SolidColorBrush Color="#FF121212" Opacity="0.1"/>
+        </Border.Background>
+        <Grid Width="1330" MinHeight="50">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 12 10 0">
+                    <TextBlock Style="{DynamicResource Header}" Foreground="White" Text="{Binding Name}" HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock Style="{DynamicResource Header}" Foreground="White" Text=" - " HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock Style="{DynamicResource Header}" Foreground="White" Text="{Binding SelectionDateTime, StringFormat='Время выборки: {0:dd.MM.yyyy HH:mm:ss}'}" HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock Style="{DynamicResource Header}" Foreground="White" Text=" - " HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock Style="{DynamicResource Header}" Foreground="White" Text="{Binding Area.Name,StringFormat='Район: {0}'}" HorizontalAlignment="Center" FontSize="20"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 5 0 0" HorizontalAlignment="Left" x:Name="StResult" Visibility="Collapsed">
+                    <ListView ItemsSource="{Binding SelectionResultOrder}" Background="Transparent" Height="300">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Width="1280"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0 15" Width="310">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Style="{DynamicResource Header}" Text="{Binding OrderId, StringFormat='Номер заказа: {0}'}" Foreground="White" FontSize="18"  Margin="20 0 0 0"/>
+                                    <TextBlock Style="{DynamicResource Header}" Text="{Binding Order.OrderWeight, StringFormat='Вес заказа: {0} кг.'}" Foreground="White" FontSize="18"  Margin="20 10 0 0" Grid.Row="1"/>
+                                    <TextBlock Style="{DynamicResource Header}" Text="{Binding Order.Area.Name, StringFormat='Район: {0}'}" Foreground="White" FontSize="18"  Margin="20 10 0 0" Grid.Row="2"/>
+                                    <TextBlock Style="{DynamicResource Header}" Text="{Binding Order.DeliveryDateTime, StringFormat='Время доставки: {0}', ConverterCulture=ru-RU}" Foreground="White" FontSize="18"  Margin="20 10 0 0" Grid.Row="3"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+            <Path Stroke="White" Name="Arrow"
+    HorizontalAlignment="Right" RenderTransformOrigin="0.5, 0.5" Visibility="Visible"
+    VerticalAlignment="Center" StrokeThickness="2"  StrokeEndLineCap="Square" StrokeStartLineCap="Square"
+    Data="M9 1.5L5 5.5L1 1.5" Margin="0 0 10 3">
+                <Path.RenderTransform>
+                    <RotateTransform Angle="0"/>
+                </Path.RenderTransform>
+            </Path>
+            <Path Stroke="White" Name="ArrowUp" Visibility="Collapsed"
+    HorizontalAlignment="Right" RenderTransformOrigin="0.5, 0.5"
+    VerticalAlignment="Center" StrokeThickness="2"  StrokeEndLineCap="Square" StrokeStartLineCap="Square"
+    Data="M9 1.5L5 5.5L1 1.5" Margin="0 0 10 3">
+                <Path.RenderTransform>
+                    <RotateTransform Angle="180"/>
+                </Path.RenderTransform>
+            </Path>
+        </Grid>
+    </Border>
+
+</UserControl>

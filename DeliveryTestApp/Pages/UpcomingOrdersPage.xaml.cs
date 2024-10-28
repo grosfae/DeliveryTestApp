@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,50 +19,43 @@ using System.Windows.Shapes;
 namespace DeliveryTestApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для OrderListPage.xaml
+    /// Логика взаимодействия для UpcomingOrdersPage.xaml
     /// </summary>
-    public partial class OrderListPage : Page
+    public partial class UpcomingOrdersPage : Page
     {
         LoaderControl contextLoader;
-        OrderListPageViewModel contextViewModel;
-        public OrderListPage(LoaderControl loaderControl)
+        UpcomingOrdersPageViewModel contextViewModel;
+        public UpcomingOrdersPage(LoaderControl loaderControl)
         {
             InitializeComponent();
             contextLoader = loaderControl;
 
-            contextViewModel = new OrderListPageViewModel();
+            contextViewModel = new UpcomingOrdersPageViewModel();
             DataContext = contextViewModel;
+
             contextLoader.LoaderStart();
         }
-
         private void ResetSortBtn_Click(object sender, RoutedEventArgs e)
         {
-            CbSort.SelectedIndex = 0;
             CbArea.SelectedItem = null;
-            DtDateStart.SelectedDate = null;
-            DtDateEnd.SelectedDate = null;
         }
 
         private async void GenerateSelectionBtn_Click(object sender, RoutedEventArgs e)
         {
+            if(CbArea.SelectedItem == null)
+            {
+                MessageBox.Show("Перед сохранением данной выборки выберите район");
+                return;
+            }
             await Task.Run(() => SaveFilteredSelection());
         }
         private void SaveFilteredSelection()
         {
             try
             {
-                string SelectionName = string.Empty;
-                if (contextViewModel.DateTimeStart != null && contextViewModel.DateTimeEnd != null)
-                {
-                    SelectionName = $"Выборка заказов {contextViewModel.DateTimeStart} - {contextViewModel.DateTimeEnd}";
-                }
-                else
-                {
-                    SelectionName = $"Выборка заказов";
-                }
                 var SelectionResult = new SelectionResult
                 {
-                    Name = SelectionName,
+                    Name = $"Выборка ближайших заказов. Дата первой доставки: {contextViewModel.SelectedArea.FirstDeliveryTime}",
                     Area = contextViewModel.SelectedArea,
                     SelectionDateTime = DateTime.Now
                 };
@@ -79,7 +71,7 @@ namespace DeliveryTestApp.Pages
                 App.DB.DeliveryLog.Add(new DeliveryLog()
                 {
                     LogDateTime = DateTime.Now,
-                    Description = $"Сохранена выборка заказов в таблицу SelectionResult №{SelectionResult.Id} от {SelectionResult.SelectionDateTime}"
+                    Description = $"Сохранена выборка ближайших заказов в таблицу SelectionResult №{SelectionResult.Id} от {SelectionResult.SelectionDateTime}"
                 });
                 App.DB.SaveChanges();
                 MessageBox.Show("Выборка успешно сохранена!");
@@ -90,9 +82,22 @@ namespace DeliveryTestApp.Pages
             }
         }
 
+        private void CbArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(CbArea.SelectedItem != null)
+            {
+                TbAreaFirstDeliveryTime.Text = $"Время: {(CbArea.SelectedItem as Area).FirstDeliveryTime}";
+                TbAreaFirstDeliveryTime.Visibility = Visibility.Visible;            
+            }
+            else
+            {
+                TbAreaFirstDeliveryTime.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void LvOrder_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if(LvOrder.Visibility == Visibility.Visible)
+            if (LvOrder.Visibility == Visibility.Visible)
             {
                 contextLoader.LoaderStop();
             }
